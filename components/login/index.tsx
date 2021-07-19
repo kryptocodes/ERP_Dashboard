@@ -1,15 +1,38 @@
-import React from "react";
+import React, { Children } from "react";
 import { useRouter } from "next/router";
 import { Formik } from "formik";
 
-const LoginPage = ({}) => {
-  const router = useRouter();
-  
+interface LoginProps {
+  values: {
+    email: string;
+    password: string;
+  };
+  onSubmit: (values: any) => void;
+}
 
+const LoginPage:React.FC<LoginProps> = ({}) => {
+  const router = useRouter();
+  const ErrorMessage = (props) => (
+    <p className="text-red-600 text-sm flex p-2 ">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-5 w-5"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path
+          fillRule="evenodd"
+          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+          clipRule="evenodd"
+        />
+      </svg>
+      {props.errors}
+    </p>
+  );
 
   const Form = () => (
     <>
-      <div className="min-h-screen mx-auto flex items-center justify-center  py-12 px-8 sm:px-6 lg:px-8">
+      <div className="min-h-screen mx-auto flex items-center justify-center py-12 px-8 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
           <div>
             <svg
@@ -32,23 +55,30 @@ const LoginPage = ({}) => {
           </div>
 
           <Formik
-            initialValues={{ email: "", password: "" }}
+            initialValues={{ email: "demo@gmail.com", password: "demo@123" }}
             validate={(values) => {
               const errors = {};
-              if (!values.email) {
-                errors.email = "Required Email";
-              } else if (
-                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-              ) {
-                errors.email = "Invalid email address";
+              switch(values){
+                case !values.email: {
+                  errors.email = "Please enter email";
+                  break;
+                }
+                case !values.password:
+                  {
+                    errors.password = "Please enter password";
+                    break;
+                  }
+                default: {
+                  errors.email = "Please enter email";
+                  errors.password = "Please enter password";
+           
               }
-              return errors;
-            }}
+            }}}
             onSubmit={(values, { setSubmitting }) => {
               setTimeout(() => {
-                alert(JSON.stringify(values, null, 2));
+                router.push('/dashboard')
                 setSubmitting(false);
-              }, 400);
+              }, 1000);
             }}
           >
             {({
@@ -59,7 +89,6 @@ const LoginPage = ({}) => {
               handleBlur,
               handleSubmit,
               isSubmitting,
-          
             }) => (
               <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
                 <input type="hidden" name="remember" value="true" />
@@ -74,13 +103,17 @@ const LoginPage = ({}) => {
                       name="email"
                       autoComplete="email"
                       required
+                      defaultValue={values.email}
                       onChange={handleChange}
                       onBlur={handleBlur}
                       value={values.email}
                       className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                       placeholder="Email address"
                     />
-                    {errors.email && touched.email && errors.email}
+
+                    {errors.email && touched.email && (
+                      <ErrorMessage errors={errors.email} />
+                    )}
                   </div>
                   <div>
                     <label htmlFor="password" className="sr-only">
@@ -92,13 +125,16 @@ const LoginPage = ({}) => {
                       type="password"
                       autoComplete="current-password"
                       required
+                      defaultValue={values.password}
                       onChange={handleChange}
                       onBlur={handleBlur}
                       value={values.password}
                       className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                       placeholder="Password"
                     />
-                    {errors.password && touched.password && errors.password}
+                    {errors.password && touched.password && (
+                      <ErrorMessage errors={errors.password} />
+                    )}
                   </div>
                 </div>
 
@@ -135,24 +171,36 @@ const LoginPage = ({}) => {
                     className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                   >
                     <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-                     {isSubmitting ?
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                      </svg>
-                       :
+                      {isSubmitting ? (
                         <svg
-                        className="h-5 w-5 text-white"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                          clipRule="evenodd"
-                        />
-                      </svg>}
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="animate-spin h-5 w-5 text-white"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                          />
+                        </svg>
+                      ) : (
+                        <svg
+                          className="h-5 w-5 text-white"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      )}
                     </span>
                     Sign in
                   </button>
@@ -167,7 +215,7 @@ const LoginPage = ({}) => {
   return (
     <div className="flex">
       <div className="hidden lg:block w-2/3 h-screen bg-blue-500"></div>
-      <div className="lg:w-2/4 md:w-full">
+      <div className="w-full lg:w-2/4 md:w-full mx-auto">
         <Form />
       </div>
     </div>
