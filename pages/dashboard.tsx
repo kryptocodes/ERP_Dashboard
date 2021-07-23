@@ -1,4 +1,5 @@
 import React from 'react'
+import LandingProps from '../components/dashboard/LandingProps';
 import NavBar from '../components/navbar/NavBar';
 
 interface dashboardProps {
@@ -8,7 +9,9 @@ interface dashboardProps {
 const dashboard: React.FC<dashboardProps> = ({}) => {
         return (
             <>
-            <NavBar/>
+            <NavBar>
+            <LandingProps/>
+            </NavBar>
             </>
         );
 }

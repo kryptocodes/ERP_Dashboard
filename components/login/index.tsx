@@ -58,22 +58,18 @@ const LoginPage:React.FC<LoginProps> = ({}) => {
             initialValues={{ email: "demo@gmail.com", password: "demo@123" }}
             validate={(values) => {
               const errors = {};
-              switch(values){
-                case !values.email: {
-                  errors.email = "Please enter email";
-                  break;
-                }
-                case !values.password:
-                  {
-                    errors.password = "Please enter password";
-                    break;
-                  }
-                default: {
-                  errors.email = "Please enter email";
-                  errors.password = "Please enter password";
-           
+              if (!values.email) {
+                errors.email = "Required";
               }
-            }}}
+              if (!values.password) {
+                errors.password = "Required";
+              }
+              if(values.password !== "demo@123"){
+                errors.password = "Invalid password";
+              }
+
+              return errors;
+            }}
             onSubmit={(values, { setSubmitting }) => {
               setTimeout(() => {
                 router.push('/dashboard')

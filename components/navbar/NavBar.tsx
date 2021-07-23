@@ -2,9 +2,12 @@ import React from "react";
 import Link from "next/link";
 
 import { Menu } from "@headlessui/react";
-import router from "next/router";
+import { useRouter} from "next/router";
 
-interface NavBarProps {}
+
+interface NavBarProps {
+    children?: React.ReactNode;
+}
 
 const Data = [
   {
@@ -49,14 +52,15 @@ const Data = [
   },
 ];
 
-const NavBar: React.FC<NavBarProps> = ({}) => {
+const NavBar: React.FC<NavBarProps> = ({children}) => {
+  const router = useRouter()
   const SideBar = () => (
-    <div className="lg:w-48 pt-16  overflow-auto md:w-1/3 w-1/6 min-h-screen bg-indigo-500 text-white">
+    <div className="lg:w-48 fixed pt-16 md:w-1/3 w-1/6 min-h-screen bg-indigo-500 text-white">
       <div className="grid grid-row">
         {Data.map((v, i) => (
           <div key={i} className="text-white hover:text-indigo-500 p-2 ">
             <Link href={v?.link}>
-              <a className="flex rounded-full px-4  hover:bg-indigo-200 mx-auto p-2 space-x-4">
+              <a className={`${router.pathname === v?.link ? `bg-gray-900 text-white` : ``} flex rounded-full px-4  hover:bg-indigo-200 mx-auto p-2 space-x-4`}>
                 {v?.svg}
                 <p className="text-lg hidden lg:block md:block font-semibold">
                   {v.name}
@@ -67,28 +71,18 @@ const NavBar: React.FC<NavBarProps> = ({}) => {
         ))}
       </div>
     </div>
+        
   );
 
   return (
     <>
-      <div className="bg-indigo-500  fixed w-full text-xl font-semibold text-white p-4">
+      <div className="bg-indigo-500  fixed w-full text-xl font-semibold text-white z-50 p-4">
         <div className="flex justify-between">
+          
           <h1> ERP Management System </h1>
+          
           <div className="flex justify-end">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="mt-1 h-6 w-auto mr-2"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
+          
 
             <Menu>
               <Menu.Button>
@@ -179,7 +173,15 @@ const NavBar: React.FC<NavBarProps> = ({}) => {
           </div>
         </div>
       </div>
-      <SideBar />
+   
+          <div className="flex ">
+              <div className="flex">
+          <SideBar/>
+          </div>
+          <div className="flex-auto pt-20 mx-auto">
+          {children}
+          </div>
+          </div>
     </>
   );
 };
