@@ -55,7 +55,7 @@ const Data = [
 const NavBar: React.FC<NavBarProps> = ({children}) => {
   const router = useRouter()
   const SideBar = () => (
-    <div className="lg:w-48 fixed pt-16 md:w-1/3 w-1/6 min-h-screen bg-indigo-500 text-white">
+    <div className="lg:w-48 pt-16 md:w-1/3 min-h-screen sticky top-0 h-screen text-white">
       <div className="grid grid-row">
         {Data.map((v, i) => (
           <div key={i} className="text-white hover:text-indigo-500 p-2 ">
@@ -174,13 +174,13 @@ const NavBar: React.FC<NavBarProps> = ({children}) => {
         </div>
       </div>
    
-          <div className="flex ">
-              <div className="flex">
+          <div className="flex  ">
+              <aside className="flex relative bg-indigo-500">
           <SideBar/>
-          </div>
-          <div className="flex-auto pt-20 mx-auto">
+          </aside>
+          <main className="flex-auto overflow-y-auto pt-20 mx-auto relative h-full min-h-screen mx-auto p-2">
           {children}
-          </div>
+          </main>
           </div>
     </>
   );
