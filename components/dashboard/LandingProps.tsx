@@ -10,14 +10,49 @@ import {
 } from "@heroicons/react/outline";
 interface LandingPropsProps {}
 
+
+const Data1 = 
+  {
+          
+    series: [{
+      name: 'series1',
+      data: [31, 40, 28, 51, 42, 109, 100]
+    }, {
+      name: 'series2',
+      data: [11, 32, 45, 32, 34, 52, 41]
+    }],
+    options: {
+      chart: {
+        height: 350,
+        type: 'area'
+      },
+      dataLabels: {
+        enabled: false
+      },
+      stroke: {
+        curve: 'smooth'
+      },
+      xaxis: {
+        type: 'datetime',
+        categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
+      },
+      tooltip: {
+        x: {
+          format: 'dd/MM/yy HH:mm'
+        },
+      },
+    },
+  
+  
+  }
 const Data = {
   series: [{
     name: "product1",
-    data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+    data: [10, 41, 100, 16, 148]
 },
 {
   name: "product2",
-  data: [15, 45, 35, 51, 49, 62, 100, 91, 148]
+  data: [15, 45, 35, 91, 148]
 }],
 options: {
   chart: {
@@ -34,7 +69,7 @@ options: {
   },
   title: {
     text: 'Product Trends by Month',
-    align: 'left'
+    align: 'center'
   },
   grid: {
     row: {
@@ -43,7 +78,7 @@ options: {
     },
   },
   xaxis: {
-    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+    categories: ['Jan', 'Jun', 'Jul', 'Aug', 'Sep'],
   }
 },
 }
@@ -94,7 +129,9 @@ const LandingProps: React.FC<LandingPropsProps> = ({}) => {
 
       
       </div>
-     
+      <div className="mx-auto p-4 ">
+      <Chart type="area" options={Data1.options} series={Data1.series}  />
+      </div>
     </div>
   );
 };
