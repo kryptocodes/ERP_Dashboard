@@ -2,11 +2,10 @@ import React from "react";
 import Link from "next/link";
 
 import { Menu } from "@headlessui/react";
-import { useRouter} from "next/router";
-
+import { useRouter } from "next/router";
 
 interface NavBarProps {
-    children?: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 const Data = [
@@ -50,17 +49,39 @@ const Data = [
       </svg>
     ),
   },
+  {
+    name: "Table",
+    link: "/table",
+    svg: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="mt-1 h-5 w-auto"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path
+          fillRule="evenodd"
+          d="M5 4a3 3 0 00-3 3v6a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H5zm-1 9v-1h5v2H5a1 1 0 01-1-1zm7 1h4a1 1 0 001-1v-1h-5v2zm0-4h5V8h-5v2zM9 8H4v2h5V8z"
+          clipRule="evenodd"
+        />
+      </svg>
+    ),
+  },
 ];
 
-const NavBar: React.FC<NavBarProps> = ({children}) => {
-  const router = useRouter()
+const NavBar: React.FC<NavBarProps> = ({ children }) => {
+  const router = useRouter();
   const SideBar = () => (
     <div className="lg:w-48 pt-16 md:w-1/3 min-h-screen sticky top-0 h-screen text-white">
       <div className="grid grid-row">
         {Data.map((v, i) => (
           <div key={i} className="text-white hover:text-indigo-500 p-2 ">
             <Link href={v?.link}>
-              <a className={`${router.pathname === v?.link ? `bg-gray-900 text-white` : ``} flex rounded-full px-4  hover:bg-indigo-200 mx-auto p-2 space-x-4`}>
+              <a
+                className={`${
+                  router.pathname === v?.link ? `bg-gray-900 text-white` : ``
+                } flex rounded-full px-4  hover:bg-indigo-200 mx-auto p-2 space-x-4`}
+              >
                 {v?.svg}
                 <p className="text-lg hidden lg:block md:block font-semibold">
                   {v.name}
@@ -71,19 +92,15 @@ const NavBar: React.FC<NavBarProps> = ({children}) => {
         ))}
       </div>
     </div>
-        
   );
 
   return (
     <>
       <div className="bg-indigo-500  fixed w-full text-xl font-semibold text-white z-50 p-4">
         <div className="flex justify-between">
-          
           <h1> ERP Management System </h1>
-          
-          <div className="flex justify-end">
-          
 
+          <div className="flex justify-end">
             <Menu>
               <Menu.Button>
                 <svg
@@ -173,15 +190,15 @@ const NavBar: React.FC<NavBarProps> = ({children}) => {
           </div>
         </div>
       </div>
-   
-          <div className="flex  ">
-              <aside className="flex relative bg-indigo-500">
-          <SideBar/>
-          </aside>
-          <main className="flex-auto overflow-y-auto pt-20 mx-auto relative h-full min-h-screen mx-auto p-2">
+
+      <div className="flex  ">
+        <aside className="flex relative bg-indigo-500">
+          <SideBar />
+        </aside>
+        <main className="flex-auto overflow-y-auto pt-20 mx-auto relative h-full min-h-screen mx-auto p-2">
           {children}
-          </main>
-          </div>
+        </main>
+      </div>
     </>
   );
 };

@@ -2,7 +2,6 @@ import React from "react";
 import Card from "./Card";
 import dynamic from "next/dynamic";
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
-
 import {
   CurrencyRupeeIcon,
   TrendingUpIcon,
@@ -10,6 +9,76 @@ import {
 } from "@heroicons/react/outline";
 interface LandingPropsProps {}
 
+
+
+
+
+const Data =  
+  {
+          
+    series: [50, 20, 30],
+   
+    options: {
+      chart: {
+        type: 'radialBar',
+        offsetY: -20,
+        sparkline: {
+          enabled: true
+        }
+      },
+      
+      plotOptions: {
+        radialBar: {
+          startAngle: -90,
+          endAngle: 90,
+          track: {
+            background: "#ffffff",
+            strokeWidth: '97%',
+            margin: 5, // margin is in pixels
+            dropShadow: {
+              enabled: true,
+              top: 2,
+              left: 0,
+              color: '#f59e0b',
+              opacity: 1,
+              blur: 2
+            }
+          },
+          dataLabels: {
+            name: {
+              show: false
+            },
+            value: {
+              color: '#ffffff',
+              offsetY: -2,
+              fontSize: '22px'
+            },
+            
+          }
+        }
+      },
+      grid: {
+        padding: {
+          top: -10
+        }
+      },
+      fill: {
+        type: 'gradient',
+        colors: ['#f59e0b', '#f5b0b0'],
+        gradient: {
+          shade: 'dark',
+          shadeIntensity: 0,
+          inverseColors: false,
+          opacityFrom: 1,
+          opacityTo: 1,
+          stops: [0, 100]
+        },
+      },
+      labels: ['Average Results'],
+    },
+  
+  
+  };
 
 const Data1 = 
   {
@@ -45,43 +114,7 @@ const Data1 =
   
   
   }
-const Data = {
-  series: [{
-    name: "product1",
-    data: [10, 41, 100, 16, 148]
-},
-{
-  name: "product2",
-  data: [15, 45, 35, 91, 148]
-}],
-options: {
-  chart: {
-    type: 'line',
-    zoom: {
-      enabled: false
-    }
-  },
-  dataLabels: {
-    enabled: false
-  },
-  stroke: {
-    curve: 'straight'
-  },
-  title: {
-    text: 'Product Trends by Month',
-    align: 'center'
-  },
-  grid: {
-    row: {
-      colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-      opacity: 0.5
-    },
-  },
-  xaxis: {
-    categories: ['Jan', 'Jun', 'Jul', 'Aug', 'Sep'],
-  }
-},
-}
+
 
 
 const LandingProps: React.FC<LandingPropsProps> = ({}) => {
@@ -120,16 +153,25 @@ const LandingProps: React.FC<LandingPropsProps> = ({}) => {
             </>
           }
         />
-         <div className="w-full h-1/2"> 
-   
+        <Card
+          box={
           
-   <Chart type="line" options={Data.options} series={Data.series} chart={Data.options.chart} />
+           <Chart options={Data.options} series={Data.series} type="radialBar" />
 
-</div>
+          }
+          bottom={
+            <>
+            <p>Sales</p>
+            </>
+          }
+        />
+
+    
+ 
 
       
       </div>
-      <div className="mx-auto p-4 ">
+      <div className="mx-auto pt-2">
       <Chart type="area" options={Data1.options} series={Data1.series}  />
       </div>
     </div>

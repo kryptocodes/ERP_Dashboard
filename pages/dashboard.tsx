@@ -10,7 +10,10 @@ const dashboard: React.FC<dashboardProps> = ({}) => {
         return (
             <>
             <NavBar>
+                <div className="p-2">
+                    <h1 className="text-lg font-medium pb-2">Hello John,</h1>
             <LandingProps/>
+            </div>
             </NavBar>
             </>
         );
