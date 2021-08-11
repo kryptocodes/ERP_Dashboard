@@ -134,7 +134,7 @@ const NavBar: React.FC<NavBarProps> = ({ children }) => {
                           <div className="p-2 mt-2 rounded-lg ">
                             <button
                               className="flex pb-2 hover:bg-indigo-400 hover:text-white  rounded-lg p-2 w-full"
-                              onClick={() => {}}
+                              onClick={() => router.push('/accounts')}
                             >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"

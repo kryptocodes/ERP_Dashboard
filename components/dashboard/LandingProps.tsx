@@ -7,6 +7,7 @@ import {
   TrendingUpIcon,
   ClipboardListIcon,
 } from "@heroicons/react/outline";
+import Projects from "./projects";
 interface LandingPropsProps {}
 
 
@@ -92,7 +93,7 @@ const Data1 =
     }],
     options: {
       chart: {
-        height: 350,
+        height: 100,
         type: 'area'
       },
       dataLabels: {
@@ -171,9 +172,10 @@ const LandingProps: React.FC<LandingPropsProps> = ({}) => {
 
       
       </div>
-      <div className="mx-auto pt-2">
+      <div className="container lg:p-4 sm:p-0 sm:w-full">
       <Chart type="area" options={Data1.options} series={Data1.series}  />
       </div>
+      <Projects/>
     </div>
   );
 };
