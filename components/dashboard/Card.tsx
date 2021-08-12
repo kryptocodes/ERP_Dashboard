@@ -13,7 +13,7 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = (props) => {
         return (
-                <div className="bg-indigo-500 text-white rounded-xl h-full pb-5 px-5">
+                <div className="bg-indigo-500 text-white rounded-xl h-25 pb-5 px-5">
                   <Popover as="div" className="relative flex flex-end">
                     
                     <Popover.Button as="button" className="py-2 px-0 ml-auto"> 
@@ -48,7 +48,7 @@ const Card: React.FC<CardProps> = (props) => {
                     {props.box}
                 
             
-                  <p className="text-xl pt-2 ml-2 ">
+                  <p className="relative bottom-0 text-xl pt-2 ml-2 ">
                     {props.bottom}
                   </p>
                 </div>

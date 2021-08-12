@@ -22,7 +22,7 @@ const Data =
     options: {
       chart: {
         type: 'radialBar',
-        offsetY: -20,
+        offsetY: 0,
         sparkline: {
           enabled: true
         }
@@ -82,39 +82,43 @@ const Data =
   };
 
 const Data1 = 
-  {
+{
           
-    series: [{
-      name: 'series1',
-      data: [31, 40, 28, 51, 42, 109, 100]
-    }, {
-      name: 'series2',
-      data: [11, 32, 45, 32, 34, 52, 41]
-    }],
-    options: {
-      chart: {
-        height: 100,
-        type: 'area'
-      },
-      dataLabels: {
+  series: [{
+      name: "Products",
+      data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+  }],
+  options: {
+    chart: {
+      height: 350,
+      type: 'bar',
+      zoom: {
         enabled: false
-      },
-      stroke: {
-        curve: 'smooth'
-      },
-      xaxis: {
-        type: 'datetime',
-        categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
-      },
-      tooltip: {
-        x: {
-          format: 'dd/MM/yy HH:mm'
-        },
+      }
+    },
+    colors: ["#6366f1"],
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      curve: 'straight'
+    },
+    grid: {
+      row: {
+        colors: ['transparent', 'transparent'], // takes an array which will be repeated on columns
+        opacity: 0.5
       },
     },
+    xaxis: {
+      categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+    }
+  },
   
-  
-  }
+
+};
+
+
+
 
 
 
@@ -172,9 +176,35 @@ const LandingProps: React.FC<LandingPropsProps> = ({}) => {
 
       
       </div>
-      <div className="container lg:p-4 sm:p-0 sm:w-full">
-      <Chart type="area" options={Data1.options} series={Data1.series}  />
-      </div>
+    
+
+
+      <div className="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-3 ">
+      
+                <div className="col-span-2 bg-white rounded-md" >
+            
+                  <div className="flex items-center justify-between p-4 border-b dark:border-primary">
+                    <h4 className="text-lg font-semibold text-gray-500 dark:text-light">Chart</h4>
+                   
+                  </div>
+                  <div className="mx-auto ">
+                  <Chart type="bar" height="350" options={Data1.options} series={Data1.series}  />
+                  </div>
+                </div>
+                <div className="col-span bg-white rounded-md bg-indigo-100" >
+            
+                  <div className="flex items-center justify-between p-4 border-b dark:border-primary">
+                    <h4 className="text-lg font-semibold text-gray-500 dark:text-light">Chart</h4>
+                   
+                  </div>
+                  <div className="mx-auto ">
+                  <Chart type="area" height="350" options={Data1.options} series={Data1.series}  />
+                  </div>
+                </div>
+                </div>
+
+  
+
       <Projects/>
     </div>
   );
