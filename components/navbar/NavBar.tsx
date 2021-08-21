@@ -72,7 +72,7 @@ const Data = [
 const NavBar: React.FC<NavBarProps> = ({ children }) => {
   const router = useRouter();
   const SideBar = () => (
-    <div className="lg:w-48 pt-16 md:w-1/3 min-h-screen sticky top-0 h-screen text-white">
+    <div className="lg:w-48 hidden lg:block md:block pt-16 md:w-1/3 min-h-screen sticky top-0 h-screen text-white">
       <div className="grid grid-row">
         {Data.map((v, i) => (
           <div key={i} className="text-white hover:text-indigo-500 p-2 ">
@@ -94,6 +94,29 @@ const NavBar: React.FC<NavBarProps> = ({ children }) => {
     </div>
   );
 
+  const BottomNavBar = () => (
+    <section id="bottom-navigation" className="lg:hidden md:hidden block fixed inset-x-0 bottom-0 z-10 bg-white shadow">
+      <div id="tabs" className="flex justify-between bg-indigo-500">
+      {Data.map((v, i) => (
+          <div key={i} className="text-white hover:text-indigo-500 p-2 ">
+            <Link href={v?.link}>
+              <a
+                className={`${router.pathname.includes(v?.link) ? `bg-gray-900 text-white` : ``
+                  } flex rounded-full px-4  hover:bg-indigo-200 mx-auto p-2 space-x-4`}
+              >
+                {v?.svg}
+                <p className="text-lg hidden lg:block md:block font-semibold">
+                  {v.name}
+                </p>
+              </a>
+            </Link>
+          </div>
+        ))}
+      </div>
+    </section>
+    )
+
+  
   return (
     <>
       <div className="bg-indigo-500  fixed w-full text-xl font-semibold text-white z-50 p-4">
@@ -195,9 +218,10 @@ const NavBar: React.FC<NavBarProps> = ({ children }) => {
         <aside className="flex relative bg-indigo-500">
           <SideBar />
         </aside>
-        <main className="flex-auto overflow-y-auto pt-20 mx-auto relative h-full min-h-screen mx-auto p-2">
+        <main className="flex-auto overflow-y-auto pt-20 mx-auto relative h-full min-h-screen mx-auto p-2 pb-20">
           {children}
         </main>
+        <BottomNavBar/>
       </div>
     </>
   );
