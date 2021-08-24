@@ -1,32 +1,23 @@
-import React from 'react'
+import React from "react";
 
+export default function useWindowSize() {
+  const isSSR = typeof window !== "undefined";
+  const [windowSize, setWindowSize] = React.useState({
+    width: isSSR ? 1200 : window.innerWidth,
+    height: isSSR ? 800 : window.innerHeight,
+  });
 
-function getWindowDimensions() {
-    const { innerWidth: width, innerHeight: height } = window;
-    return {
-      width,
-      height
+  function changeWindowSize() {
+    setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+  }
+
+  React.useEffect(() => {
+    window.addEventListener("resize", changeWindowSize);
+
+    return () => {
+      window.removeEventListener("resize", changeWindowSize);
     };
+  }, []);
+
+  return windowSize;
 }
-
-const WindowAPI = () => {
-    const [windowSize, setWindowSize] = React.useState<any>(getWindowDimensions())
-    React.useEffect(() => {
-        function handleResize() {
-            setWindowSize(getWindowDimensions());
-          }
-      
-          window.addEventListener('resize', handleResize);
-          return () => window.removeEventListener('resize', handleResize);
-    }, [])
-
-    return windowSize;
-}
-
-
-
-
-
-
-
-export default WindowAPI
