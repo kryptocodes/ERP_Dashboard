@@ -49,7 +49,7 @@ const TableResponsive: React.FC<TableResponsiveProps> = ({}) => {
               src="https://randomuser.me/api/portraits/men/3.jpg"
             />
           </div>
-                <p>{data?.Status}</p>
+                <p className="text-lg">{data?.Status}</p>
                 
         
             <div className="flex justify-end">

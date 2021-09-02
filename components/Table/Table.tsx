@@ -9,6 +9,7 @@ interface TableProps {
 
 const Table: React.FC<TableProps> = ({}) => {
     const value = useWindowSize();
+    console.log(value)
     return (
         <>
             { value?.width >= 678 ? <Projects/> : <TableResponsive/> }
