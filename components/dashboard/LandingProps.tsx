@@ -8,7 +8,7 @@ import {
   ClipboardListIcon,
 } from "@heroicons/react/outline";
 import Projects from "./projects";
-import useWindowSize from "../utils/windowAPI";
+import UseWindowSize from "../utils/windowAPI";
 import TableResponsive from "../card/TableResponsive";
 interface LandingPropsProps {}
 
@@ -125,7 +125,7 @@ const Data1 =
 
 
 const LandingProps: React.FC<LandingPropsProps> = ({}) => {
-  const value = useWindowSize()
+  const value = UseWindowSize()
   return (
     <div className="text-black  text-4xl">
       <div className="grid lg:grid-cols-3 md:grid-col-6 gap-2">

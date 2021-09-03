@@ -1,14 +1,18 @@
 import React from 'react'
+
+
+import dynamic from 'next/dynamic';
 import TableResponsive from '../card/TableResponsive';
 import Projects from '../dashboard/projects';
-import useWindowSize from '../utils/windowAPI';
+
+import UseWindowSize from '../utils/windowAPI'
 
 interface TableProps {
 
 }
 
 const Table: React.FC<TableProps> = ({}) => {
-    const value = useWindowSize();
+    const value = UseWindowSize();
     console.log(value)
     return (
         <>

@@ -3,10 +3,7 @@ import { Popover } from '@headlessui/react'
 
 
 interface CardProps {
-    props: {
-        box:  JSX.Element,
-        bottom: JSX.Element,
-    }
+    props: any
 }
 
 
@@ -45,11 +42,11 @@ const Card: React.FC<CardProps> = (props) => {
                  
                   </Popover>
                  
-                    {props.box}
+                    {props?.box}
                 
             
                   <p className="relative bottom-0 text-xl pt-2 ml-2 ">
-                    {props.bottom}
+                    {props?.bottom}
                   </p>
                 </div>
         );
