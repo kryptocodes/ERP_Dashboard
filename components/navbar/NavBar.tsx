@@ -67,6 +67,26 @@ const Data = [
       </svg>
     ),
   },
+  {
+    name: "Form",
+    link: "/form",
+    svg: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="mt-1 h-5 w-auto"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+        />
+      </svg>
+    ),
+  },
 ];
 
 const NavBar: React.FC<NavBarProps> = ({ children }) => {
@@ -95,14 +115,20 @@ const NavBar: React.FC<NavBarProps> = ({ children }) => {
   );
 
   const BottomNavBar = () => (
-    <section id="bottom-navigation" className="lg:hidden md:hidden block fixed inset-x-0 bottom-0 z-10 bg-white shadow">
+    <section
+      id="bottom-navigation"
+      className="lg:hidden md:hidden block fixed inset-x-0 bottom-0 z-10 bg-white shadow"
+    >
       <div id="tabs" className="flex justify-between bg-indigo-500">
-      {Data.map((v, i) => (
+        {Data.map((v, i) => (
           <div key={i} className="text-white hover:text-indigo-500 p-2 ">
             <Link href={v?.link}>
               <a
-                className={`${router.pathname.includes(v?.link) ? `bg-gray-900 text-white` : ``
-                  } flex rounded-full px-4  hover:bg-indigo-200 mx-auto p-2 space-x-4`}
+                className={`${
+                  router.pathname.includes(v?.link)
+                    ? `bg-gray-900 text-white`
+                    : ``
+                } flex rounded-full px-4  hover:bg-indigo-200 mx-auto p-2 space-x-4`}
               >
                 {v?.svg}
                 <p className="text-lg hidden lg:block md:block font-semibold">
@@ -114,9 +140,8 @@ const NavBar: React.FC<NavBarProps> = ({ children }) => {
         ))}
       </div>
     </section>
-    )
+  );
 
-  
   return (
     <>
       <div className="bg-indigo-500  fixed w-full text-xl font-semibold text-white z-50 p-4">
@@ -157,7 +182,7 @@ const NavBar: React.FC<NavBarProps> = ({ children }) => {
                           <div className="p-2 mt-2 rounded-lg ">
                             <button
                               className="flex pb-2 hover:bg-indigo-400 hover:text-white  rounded-lg p-2 w-full"
-                              onClick={() => router.push('/accounts')}
+                              onClick={() => router.push("/accounts")}
                             >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -221,7 +246,7 @@ const NavBar: React.FC<NavBarProps> = ({ children }) => {
         <main className="flex-auto overflow-y-auto pt-20 mx-auto relative h-full min-h-screen mx-auto p-2 pb-20">
           {children}
         </main>
-        <BottomNavBar/>
+        <BottomNavBar />
       </div>
     </>
   );
