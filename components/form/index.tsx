@@ -4,8 +4,8 @@ interface indexProps {}
 
 const FormIndex: React.FC<indexProps> = ({}) => {
   const Content = () => (
-    <div className="flex h-screen items-center justify-center ">
-      <div className="grid bg-white rounded-lg shadow-xl w-full">
+    <div className="items-center justify-center ">
+      <div className="grid bg-white rounded-lg shadow-xl w-full ">
         <div className="flex justify-center py-4">
           <div className="flex bg-indigo-200 rounded-full md:p-4 p-2 border-2 border-indigo-500">
             <svg
